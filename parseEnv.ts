@@ -19,7 +19,12 @@ export const parseEnv = <
   // Populate object to validate
   const vars: Record<string, string | undefined> = {};
   for (const key in schema._def.shape()) {
-    vars[key] = Deno.env.get(key);
+    if (
+      Deno.permissions.requestSync({ name: "env", variable: key }).state ===
+        "granted"
+    ) {
+      vars[key] = Deno.env.get(key);
+    }
   }
 
   return schema.parse(vars);

@@ -45,4 +45,17 @@ describe("validateEnv", () => {
 
     expect(actual).toEqual({ TEST_FOO: "foo" });
   });
+
+  it("should fallback to default or optional if denied permissions", () => {
+    const actual = parseEnv(
+      z.object({
+        TEST_NOT_ALLOWED: z.string().default("It's okay."),
+        TEST_ALSO_NOT_ALLOWED: z.string().optional(),
+      }),
+    );
+
+    expect(actual).toEqual({
+      TEST_NOT_ALLOWED: "It's okay.",
+    });
+  });
 });
