@@ -1,7 +1,7 @@
 {
   "tasks": {
     "test": "deno test --allow-env",
-    "test:watch": "deno test --allow-env --watch"
+    "test:watch": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ --watch"
   },
   "imports": {
     "@std/expect": "jsr:@std/expect@^1.0.6",
