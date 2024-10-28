@@ -1,6 +1,6 @@
 import { expect } from "jsr:@std/expect";
 import { afterAll, beforeAll, describe, it } from "jsr:@std/testing/bdd";
-import z from "https://deno.land/x/zod@v3.23.8/mod.ts";
+import { z } from "npm:zod@3";
 
 import { parseEnv } from "./parseEnv.ts";
 

@@ -1,10 +1,18 @@
 {
+  "name": "@keawade/zod-env",
+  "version": "0.1.0",
+  "publish": {
+    "include": ["README.md", "LICENSE", "deno.json", "deno.lock", "**/*.ts"],
+    "exclude": ["**/*.test.ts"]
+  },
+  "exports": "./mod.ts",
   "tasks": {
     "test": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ",
     "test:watch": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ --watch"
   },
   "imports": {
     "@std/expect": "jsr:@std/expect@^1.0.6",
-    "@std/testing": "jsr:@std/testing@^1.0.3"
+    "@std/testing": "jsr:@std/testing@^1.0.3",
+    "zod": "npm:zod@^3.23.8"
   }
 }

@@ -4,7 +4,7 @@ import type {
   ZodObject,
   ZodRawShape,
   ZodTypeAny,
-} from "https://deno.land/x/zod@v3.23.8/mod.ts";
+} from "npm:zod@3";
 
 /**
  * This function parses the current environment's variables using the provided

@@ -12,7 +12,7 @@
  *   PORT: z.coerce.number().default("8080")
  * })
  *
- * const parsedEnv = parseEnv()
+ * const parsedEnv = parseEnv();
  * ```
  */
 
