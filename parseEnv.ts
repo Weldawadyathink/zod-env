@@ -7,7 +7,7 @@ import {
   type ZodTypeAny,
 } from "https://deno.land/x/zod@v3.23.8/types.ts";
 
-export const validateEnv = <
+export const parseEnv = <
   T extends ZodObject<ZodRawShape, UnknownKeysParam, ZodTypeAny>,
 >(
   schema: T,
