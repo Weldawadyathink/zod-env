@@ -1,5 +1,7 @@
 /**
- * @module This module provides lightweight tooling for parsing envionrment
+ * @module
+ *
+ * This module provides lightweight tooling for parsing envionrment
  * variables in Deno with Zod schemas while respecting Deno's permissions
  * tooling to make environment variable usage clear.
  *

@@ -1,6 +1,6 @@
 {
   "name": "@keawade/zod-env",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publish": {
     "include": ["README.md", "LICENSE", "deno.json", "deno.lock", "**/*.ts"],
     "exclude": ["**/*.test.ts"]
