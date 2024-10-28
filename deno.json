@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "test": "deno test --allow-env",
+    "test": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ",
     "test:watch": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ --watch"
   },
   "imports": {

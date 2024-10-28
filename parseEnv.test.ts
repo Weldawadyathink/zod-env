@@ -8,7 +8,7 @@ describe("validateEnv", () => {
   const testEnv: Record<string, string> = {
     TEST_FOO: "foo",
     TEST_BAR: "42",
-    TEST_BAZ: "true",
+    TEST_BAZ: "false",
   };
 
   beforeAll(() => {
@@ -41,12 +41,56 @@ describe("validateEnv", () => {
   });
 
   it("should only get requested env vars", () => {
-    const actual = parseEnv(z.object({ TEST_FOO: z.string() }));
+    expect(
+      Deno.permissions.querySync({ name: "env", variable: "TEST_FOO" })
+        .state,
+      "Expected env.TEST_FOO permissions for this test!",
+    ).toBe("granted");
+    expect(
+      Deno.permissions.querySync({
+        name: "env",
+        variable: "TEST_BAR",
+      })
+        .state,
+      "Expected env.TEST_BAR permissions for this test!",
+    ).toBe("granted");
+    expect(
+      Deno.permissions.querySync({
+        name: "env",
+        variable: "TEST_BAZ",
+      })
+        .state,
+      "Expected env.TEST_BAZ permissions for this test!",
+    ).toBe("granted");
 
-    expect(actual).toEqual({ TEST_FOO: "foo" });
+    const actual = parseEnv(
+      z.object({
+        TEST_FOO: z.string(),
+        TEST_BAR: z.coerce.number(),
+        TEST_BAZ: z.enum(["true", "false"]).transform((val) => val === "true"),
+      }),
+    );
+
+    expect(actual).toEqual({
+      TEST_FOO: "foo",
+      TEST_BAR: 42,
+      TEST_BAZ: false,
+    });
   });
 
   it("should fallback to default or optional if denied permissions", () => {
+    expect(
+      Deno.permissions.querySync({ name: "env", variable: "TEST_NOT_ALLOWED" })
+        .state,
+    ).toBe("prompt");
+    expect(
+      Deno.permissions.querySync({
+        name: "env",
+        variable: "TEST_ALSO_NOT_ALLOWED",
+      })
+        .state,
+    ).toBe("prompt");
+
     const actual = parseEnv(
       z.object({
         TEST_NOT_ALLOWED: z.string().default("It's okay."),
