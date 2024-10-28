@@ -1,18 +1,25 @@
-import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
-import {
-  type UnknownKeysParam,
-  ZodFirstPartyTypeKind,
+import type {
+  infer as zInfer,
+  UnknownKeysParam,
   ZodObject,
-  type ZodRawShape,
-  type ZodTypeAny,
-} from "https://deno.land/x/zod@v3.23.8/types.ts";
+  ZodRawShape,
+  ZodTypeAny,
+} from "https://deno.land/x/zod@v3.23.8/mod.ts";
 
+/**
+ * This function validates the current environment's variables using the
+ * provided Zod schema.
+ *
+ * Environment variable permissions are requested individually so usage is
+ * clear.
+ *
+ * Environment variable permissions can be refused without error for optional
+ * values in the schema or when a default value is provided by the schema.
+ */
 export const parseEnv = <
   T extends ZodObject<ZodRawShape, UnknownKeysParam, ZodTypeAny>,
->(
-  schema: T,
-): z.infer<typeof schema> => {
-  if (schema._def.typeName !== ZodFirstPartyTypeKind.ZodObject) {
+>(schema: T): zInfer<typeof schema> => {
+  if (schema._def.typeName !== "ZodObject") {
     throw new Error("Invalid schema. Must extend z.object.");
   }
 
