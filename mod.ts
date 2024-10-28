@@ -1,1 +1,1 @@
-export * from "./env.ts";
+export * from "./parseEnv.ts";
