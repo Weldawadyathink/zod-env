@@ -16,6 +16,8 @@ deno add jsr:@keawade/zod-env
 
 ```ts
 import { parseEnv } from "jsr:@keawade/zod-env";
+// or, for zod/v4
+import { parseEnv } from "jsr:@keawade/zod-env/v4";
 
 const envSchema = z.object({
   FOO: z.string(),
