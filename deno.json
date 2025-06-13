@@ -5,14 +5,17 @@
     "include": ["README.md", "LICENSE", "deno.json", "deno.lock", "**/*.ts"],
     "exclude": ["**/*.test.ts"]
   },
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./mod.ts",
+    "./v4": "./v4/mod.ts"
+  },
   "tasks": {
     "test": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ",
     "test:watch": "deno test --allow-env=TEST_FOO,TEST_BAR,TEST_BAZ --watch"
   },
   "imports": {
-    "@std/expect": "jsr:@std/expect@^1.0.6",
-    "@std/testing": "jsr:@std/testing@^1.0.3",
-    "zod": "npm:zod@^3.23.8"
+    "@std/expect": "jsr:@std/expect@^1.0.16",
+    "@std/testing": "jsr:@std/testing@^1.0.14",
+    "zod": "npm:zod@^3.25.64"
   }
 }
